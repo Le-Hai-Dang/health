@@ -136,18 +136,15 @@ nav {
 }
 
 .slide:nth-child(1) {
-    background-image: url('../assets/img/anhTrungTam.jpg');
     animation: slideShow 9s infinite;
 }
 
 .slide:nth-child(2) {
-    background-image: url('../assets/img/main1.jpg');
     animation: slideShow 9s infinite;
     animation-delay: 3s;
 }
 
 .slide:nth-child(3) {
-    background-image: url('../assets/img/main2.jpg');
     animation: slideShow 9s infinite;
     animation-delay: 6s;
 }
