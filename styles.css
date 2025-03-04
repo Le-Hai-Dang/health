@@ -283,6 +283,7 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     transition: transform 0.3s;
+    width: 100%;
 }
 
 .service-card:hover, .doctor-card:hover {
@@ -451,6 +452,15 @@ footer p {
     }
 }
 
+@media (min-width: 481px) and (max-width: 768px) {
+    .service-grid > *:nth-child(3),
+    .doctor-grid > *:nth-child(3) {
+        margin-left: auto;
+        margin-right: auto;
+        grid-column: 1 / -1;
+    }
+}
+
 /* Thêm preload ảnh */
 body::after {
     position: absolute;
@@ -606,5 +616,40 @@ body.scrolled::before {
     .service-card h3,
     .doctor-card h3 {
         font-size: 1.2rem;
+    }
+}
+
+/* Tablet styles */
+@media (min-width: 481px) and (max-width: 1023px) {
+    .service-grid, .doctor-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .service-grid > *:nth-child(3),
+    .doctor-grid > *:nth-child(3) {
+        grid-column: 1 / -1;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+/* iPad Pro specific */
+@media screen and (min-width: 1024px) and (max-width: 1024px) and (min-height: 1366px) {
+    .service-grid, .doctor-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .service-grid > *:nth-child(3),
+    .doctor-grid > *:nth-child(3) {
+        grid-column: 1 / -1;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 1025px) {
+    .service-grid, .doctor-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
