@@ -1,6 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
     const joinButton = document.getElementById('joinBtn');
     const meetLink = 'https://meet.google.com/gsc-hvym-ega';
+    const menuIcon = document.querySelector('.menu-icon');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    // Toggle mobile menu
+    menuIcon.addEventListener('click', function() {
+        mobileMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!menuIcon.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.remove('active');
+        }
+    });
+
+    // Close mobile menu when clicking on a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+        });
+    });
 
     joinButton.addEventListener('click', function() {
         window.open(meetLink, '_blank');
