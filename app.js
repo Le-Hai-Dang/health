@@ -1,18 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     const joinButton = document.getElementById('joinBtn');
     const meetLink = 'https://meet.google.com/gsc-hvym-ega';
-    const menuIcon = document.querySelector('.menu-icon');
-    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
 
     // Toggle mobile menu
-    menuIcon.addEventListener('click', function() {
+    menuToggle.addEventListener('click', function(e) {
+        e.preventDefault();
         mobileMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
     });
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(e) {
-        if (!menuIcon.contains(e.target) && !mobileMenu.contains(e.target)) {
+        if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
             mobileMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
         }
     });
 
@@ -20,11 +23,23 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function() {
             mobileMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
         });
     });
 
     joinButton.addEventListener('click', function() {
-        window.open(meetLink, '_blank');
+        // Thêm animation khi click
+        this.classList.add('clicked');
+        
+        // Xóa class sau khi animation kết thúc
+        setTimeout(() => {
+            this.classList.remove('clicked');
+        }, 500);
+
+        // Delay mở link để animation có thể hoàn thành
+        setTimeout(() => {
+            window.open(meetLink, '_blank');
+        }, 300);
     });
 
     // Smooth scroll for navigation links
