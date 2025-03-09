@@ -28,18 +28,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     joinButton.addEventListener('click', function() {
-        // Thêm animation khi click
-        this.classList.add('clicked');
+        // Tạm dừng hiệu ứng heartbeat khi click
+        this.style.animation = 'none';
+        
+        // Thêm animation khi click sau một khoảng delay nhỏ
+        setTimeout(() => {
+            this.classList.add('clicked');
+        }, 10);
         
         // Xóa class sau khi animation kết thúc
         setTimeout(() => {
             this.classList.remove('clicked');
-        }, 500);
+            // Khôi phục lại hiệu ứng heartbeat
+            this.style.animation = 'heartbeat 1.5s ease-in-out infinite';
+        }, 600);
 
         // Delay mở link để animation có thể hoàn thành
         setTimeout(() => {
             window.open(meetLink, '_blank');
-        }, 300);
+        }, 400);
     });
 
     // Smooth scroll for navigation links

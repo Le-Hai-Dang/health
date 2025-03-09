@@ -317,13 +317,14 @@ nav {
     font-size: 1.2rem;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     margin-top: 2rem;
     position: relative;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
     animation: heartbeat 1.5s ease-in-out infinite;
     -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .join-button:hover {
@@ -334,6 +335,7 @@ nav {
 
 .join-button:active {
     transform: scale(0.95);
+    box-shadow: 0 3px 10px rgba(26, 115, 232, 0.5);
 }
 
 .join-button::before {
@@ -377,8 +379,6 @@ nav {
 /* Services Section */
 #services, #doctors {
     padding: 5rem 5%;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 h2 {
@@ -410,8 +410,6 @@ h2 {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     justify-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .doctor-card {
@@ -420,8 +418,8 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     transition: transform 0.3s;
-    width: 100%;
     max-width: 300px;
+    width: 100%;
 }
 
 .doctor-card img {
@@ -431,6 +429,7 @@ h2 {
     margin: 0 auto 1rem;
     object-fit: cover;
     display: block;
+    aspect-ratio: 1/1;
 }
 
 .service-card {
@@ -530,7 +529,7 @@ footer p {
 
     .join-button {
         position: relative;
-        animation: none;
+        animation: heartbeat 1.5s ease-in-out infinite;
     }
 
     .join-button.clicked {
@@ -544,17 +543,21 @@ footer p {
         left: 50%;
         width: 0;
         height: 0;
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.4);
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        transition: width 0.3s ease-out, height 0.3s ease-out;
+        transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    opacity 0.5s ease-out;
+        z-index: 1;
+        opacity: 0.8;
     }
 
     .join-button:active::after {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
         opacity: 0;
-        transition: all 0.6s ease-out;
+        transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
     }
 
     .contact-content {
@@ -581,12 +584,7 @@ footer p {
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
-    .service-grid > *:nth-child(3),
-    .doctor-grid > *:nth-child(3) {
-        margin-left: auto;
-        margin-right: auto;
-        grid-column: 1 / -1;
-    }
+    /* Xóa quy tắc không cần thiết cho phần tử thứ 3 */
 }
 
 /* Thêm preload ảnh */
@@ -625,7 +623,6 @@ body.scrolled::before {
 }
 
 .about-content {
-    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -750,19 +747,36 @@ body.scrolled::before {
     .doctor-card h3 {
         font-size: 1.2rem;
     }
+    
+    .service-grid, .doctor-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Canh giữa đội ngũ bác sĩ trên mobile */
+    .doctor-grid {
+        justify-content: center;
+    }
+    
+    .doctor-card {
+        margin: 0 auto;
+    }
 }
 
 /* Tablet styles */
-@media (min-width: 481px) and (max-width: 1023px) {
+@media (min-width: 481px) and (max-width: 1024px) {
     .service-grid, .doctor-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
     }
     
-    .service-grid > *:nth-child(3),
-    .doctor-grid > *:nth-child(3) {
-        grid-column: 1 / -1;
-        max-width: 300px;
-        margin: 0 auto;
+    /* Canh giữa đội ngũ bác sĩ trên tablet */
+    .doctor-grid {
+        justify-content: center;
+    }
+    
+    /* Đảm bảo các phần tử service-card hiển thị đẹp */
+    .service-card, .doctor-card {
+        max-width: 100%;
     }
 }
 
@@ -771,19 +785,25 @@ body.scrolled::before {
     .service-grid, .doctor-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
-    .service-grid > *:nth-child(3),
-    .doctor-grid > *:nth-child(3) {
-        grid-column: 1 / -1;
-        max-width: 300px;
-        margin: 0 auto;
-    }
 }
 
 /* Desktop styles */
 @media (min-width: 1025px) {
     .service-grid, .doctor-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Giới hạn chiều ngang của phần "Về chúng tôi" để phù hợp với grid của dịch vụ */
+    #about .about-text {
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Canh giữa đội ngũ bác sĩ tốt hơn */
+    .doctor-grid {
+        justify-content: center;
+        place-content: center;
+        margin: 0 auto;
     }
 }
 
@@ -791,10 +811,32 @@ body.scrolled::before {
     0% {
         transform: scale(1);
     }
-    50% {
+    40% {
+        transform: scale(0.92);
+    }
+    60% {
         transform: scale(0.95);
+    }
+    80% {
+        transform: scale(0.98);
     }
     100% {
         transform: scale(1);
     }
+}
+
+/* Common container style */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Đảm bảo các grid vẫn hoạt động đúng với container */
+.service-grid.container,
+.doctor-grid.container {
+    display: grid;
 }
