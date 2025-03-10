@@ -122,6 +122,12 @@ nav {
     .nav-links {
         display: none;
     }
+
+    .hero-content {
+        text-align: center;
+        padding: 0 2rem;
+        transform: translateY(-50px);
+    }
 }
 
 .mobile-menu {
@@ -521,6 +527,7 @@ footer p {
     .hero-content {
         text-align: center;
         padding: 0 2rem;
+        transform: translateY(-30px);
     }
 
     .hero-content h1 {
@@ -759,6 +766,10 @@ body.scrolled::before {
     
     .doctor-card {
         margin: 0 auto;
+    }
+
+    .hero-content {
+        transform: translateY(-50px);
     }
 }
 
