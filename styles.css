@@ -243,6 +243,7 @@ nav {
     height: 100vh;
     overflow: hidden;
     z-index: 1;
+    contain: content;
 }
 
 .slide {
@@ -255,6 +256,38 @@ nav {
     background-size: cover;
     background-position: center;
     transition: opacity 1s ease;
+    will-change: opacity;
+    contain: strict;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loadingAnimation 1.5s infinite;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+}
+
+.slide.loaded::before {
+    opacity: 0;
+}
+
+@keyframes loadingAnimation {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
 }
 
 .slide:nth-child(1) {
